@@ -21,8 +21,6 @@ defmodule SochoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    get "/apple-touch-icon.png", PageController, :no_content
-    get "/apple-touch-icon-precomposed.png", PageController, :no_content
     get "/study/:study_id", StudyController, :show, constraints: [study_id: ~r/^\d+$/]
     post "/study/:study_id/user-data", StudyController, :save_data, constraints: [study_id: ~r/^\d+$/]
     get "/studies/:study_id/export", StudyController, :export
@@ -103,5 +101,13 @@ defmodule SochoWeb.Router do
       live "/clients/:id", ClientLive.Show, :show
       live "/clients/:id/edit", ClientLive.Edit, :edit
     end
+  end
+
+  # Noise Routes
+  scope "/", SochoWeb do
+    pipe_through :browser
+
+    get "/apple-touch-icon.png", PageController, :no_content
+    get "/apple-touch-icon-precomposed.png", PageController, :no_content
   end
 end
